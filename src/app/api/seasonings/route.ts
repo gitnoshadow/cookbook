@@ -24,8 +24,13 @@ export async function POST(request: Request) {
     });
     return NextResponse.json(seasoning, { status: 201 });
   } catch (e: unknown) {
+    if (e instanceof Error) {
+      const detail = JSON.stringify(e, Object.getOwnPropertyNames(e));
+      console.error("新增調味粉失敗:", e.message, "| detail:", detail);
+    } else {
+      console.error("新增調味粉失敗(非 Error):", e);
+    }
     const message = e instanceof Error ? e.message : String(e);
-    console.error("新增調味粉失敗:", message);
     if (message.includes("Unique constraint") || message.includes("UNIQUE")) {
       return NextResponse.json({ error: "此調味粉名稱已存在" }, { status: 409 });
     }
