@@ -61,7 +61,8 @@ function NewRecipeForm() {
     if (res.ok) {
       router.push("/recipes");
     } else {
-      alert("新增失敗");
+      const data = await res.json();
+      alert(data.error || "新增失敗");
       setSaving(false);
     }
   };

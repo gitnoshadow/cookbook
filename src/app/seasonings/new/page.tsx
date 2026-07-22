@@ -21,7 +21,8 @@ export default function NewSeasoningPage() {
     if (res.ok) {
       router.push("/seasonings");
     } else {
-      alert("新增失敗，名稱可能重複了");
+      const data = await res.json();
+      alert(data.error || "新增失敗");
       setSaving(false);
     }
   };

@@ -71,7 +71,8 @@ export default function EditRecipePage() {
     if (res.ok) {
       router.push(`/recipes/${id}`);
     } else {
-      alert("更新失敗");
+      const data = await res.json();
+      alert(data.error || "更新失敗");
       setSaving(false);
     }
   };

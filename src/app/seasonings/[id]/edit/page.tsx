@@ -32,7 +32,8 @@ export default function EditSeasoningPage() {
     if (res.ok) {
       router.push(`/seasonings/${id}`);
     } else {
-      alert("更新失敗");
+      const data = await res.json();
+      alert(data.error || "更新失敗");
       setSaving(false);
     }
   };
