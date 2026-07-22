@@ -1,7 +1,11 @@
 import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
 
-const adapter = new PrismaPg(process.env.DATABASE_URL!);
+const dbUrl = process.env.DATABASE_URL || "file:./prisma/dev.db";
+
+const adapter = new PrismaLibSql({
+  url: dbUrl.startsWith("file:") ? dbUrl : `file:${dbUrl}`,
+});
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
