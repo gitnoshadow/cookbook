@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model SeasoningPowder {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  recipes     RecipeSeasoningPowder[]
+}
+
+model Recipe {
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String?
+  photoUrl      String?
+  ingredients   String?
+  steps         String?
+  cookingTime   Int?
+  difficulty    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  seasoningPowders RecipeSeasoningPowder[]
+}
+
+model RecipeSeasoningPowder {
+  recipeId          Int
+  seasoningPowderId Int
+  recipe            Recipe          @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  seasoningPowder   SeasoningPowder @relation(fields: [seasoningPowderId], references: [id], onDelete: Cascade)
+
+  @@id([recipeId, seasoningPowderId])
+}

@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #ff8fab;
+  --color-primary-light: #ffd6e0;
+  --color-primary-dark: #e85d7d;
+  --color-secondary: #c8e6c9;
+  --color-secondary-light: #e8f5e9;
+  --color-accent: #fff3e0;
+  --color-bg: #fff5f7;
+  --color-text: #5d4037;
+  --color-text-light: #8d6e63;
+  --color-card: #ffffff;
+  --color-border: #fce4ec;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans), "Noto Sans TC", sans-serif;
+}
+
+.cute-shadow {
+  box-shadow: 0 4px 20px rgba(255, 143, 171, 0.15);
+}
+
+.cute-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(255, 143, 171, 0.12);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cute-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(255, 143, 171, 0.2);
+}
+
+.cute-input {
+  border: 2px solid #fce4ec;
+  border-radius: 12px;
+  padding: 8px 16px;
+  transition: border-color 0.2s;
+}
+
+.cute-input:focus {
+  outline: none;
+  border-color: #ff8fab;
+  box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.15);
+}
+
+.cute-btn {
+  border-radius: 12px;
+  padding: 8px 24px;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.cute-btn:hover {
+  transform: scale(1.03);
+}
+
+.cute-btn:active {
+  transform: scale(0.97);
+}
