@@ -37,10 +37,10 @@ export default function HomePage() {
       {/* Hero */}
       <section className="text-center py-12">
         <h1 className="text-4xl font-bold mb-4" style={{ color: "#5d4037" }}>
-          🧂 調味粉食譜
+          🐾 喵喵の調味粉食譜筆記本
         </h1>
         <p className="text-lg mb-8" style={{ color: "#8d6e63" }}>
-          想知道你家的調味粉能做出什麼料理嗎？搜尋看看吧！
+          想知道家裡的調味粉能做出什麼料理嗎？喵～來搜尋看看吧！🐱
         </p>
         <div className="flex justify-center">
           <SearchBar />

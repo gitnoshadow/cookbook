@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "🧂 調味粉食譜",
+  title: "🐾 喵喵の調味粉食譜筆記本",
   description: "記錄各種調味粉可以做出的美味食譜",
+  icons: { icon: "/cat-paw.svg" },
 };
 
 export default function RootLayout({

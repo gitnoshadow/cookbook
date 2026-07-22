@@ -7,8 +7,8 @@ export default function Navbar() {
     <nav className="bg-white cute-shadow sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-xl font-bold" style={{ color: "#ff8fab" }}>
-          <span className="text-2xl">🧂</span>
-          <span>調味粉食譜</span>
+          <img src="/cat-paw.svg" alt="貓掌" className="w-7 h-7" />
+          <span>喵喵の調味粉食譜筆記本</span>
         </Link>
         <div className="flex items-center gap-4 text-sm font-medium">
           <Link href="/seasonings" className="hover:opacity-70 transition-opacity" style={{ color: "#5d4037" }}>
