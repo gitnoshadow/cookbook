@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import RecipeShareCard from "@/components/RecipeShareCard";
 
 type RecipeDetail = {
   id: number;
@@ -13,6 +14,7 @@ type RecipeDetail = {
   steps: string | null;
   cookingTime: number | null;
   difficulty: string | null;
+  isFavorited: boolean;
   seasoningPowders: { seasoningPowder: { id: number; name: string } }[];
 };
 
@@ -21,11 +23,13 @@ export default function RecipeDetailPage() {
   const router = useRouter();
   const [data, setData] = useState<RecipeDetail | null>(null);
   const [loading, setLoading] = useState(true);
+  const [fav, setFav] = useState(false);
+  const [showShare, setShowShare] = useState(false);
 
   useEffect(() => {
     fetch(`/api/recipes/${id}`)
       .then((r) => r.json())
-      .then((d) => { setData(d); setLoading(false); })
+      .then((d) => { setData(d); setFav(d.isFavorited); setLoading(false); })
       .catch(() => setLoading(false));
   }, [id]);
 
@@ -33,6 +37,17 @@ export default function RecipeDetailPage() {
     if (!confirm("確定要刪除此食譜嗎？")) return;
     const res = await fetch(`/api/recipes/${id}`, { method: "DELETE" });
     if (res.ok) router.push("/recipes");
+  };
+
+  const toggleFav = async () => {
+    const newState = !fav;
+    setFav(newState);
+    const res = await fetch(`/api/recipes/${id}/favorite`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ isFavorited: newState }),
+    });
+    if (!res.ok) setFav(!newState);
   };
 
   if (loading) return <div className="text-center py-20 text-4xl">⏳</div>;
@@ -52,14 +67,22 @@ export default function RecipeDetailPage() {
         <div className="p-6">
           <div className="flex items-start justify-between flex-wrap gap-4">
             <div className="flex-1">
-              <h1 className="text-3xl font-bold mb-2" style={{ color: "#5d4037" }}>{data.name}</h1>
-              {data.description && <p style={{ color: "#8d6e63" }}>{data.description}</p>}
+              <div className="flex items-center gap-3">
+                <h1 className="text-3xl font-bold" style={{ color: "#5d4037" }}>{data.name}</h1>
+                <button onClick={toggleFav} className="text-2xl transition-transform hover:scale-110">
+                  {fav ? "❤️" : "🤍"}
+                </button>
+              </div>
+              {data.description && <p className="mt-1" style={{ color: "#8d6e63" }}>{data.description}</p>}
               <div className="flex gap-4 mt-3 text-sm" style={{ color: "#8d6e63" }}>
                 {data.cookingTime && <span>⏱ {data.cookingTime} 分鐘</span>}
                 {data.difficulty && <span>📊 {data.difficulty}</span>}
               </div>
             </div>
             <div className="flex gap-3">
+              <button onClick={() => setShowShare(!showShare)} className="cute-btn" style={{ background: "#e8f5e9", color: "#2e7d32" }}>
+                📸 分享
+              </button>
               <Link href={`/recipes/${id}/edit`} className="cute-btn" style={{ background: "#fff3e0", color: "#e65100" }}>
                 ✏️ 編輯
               </Link>
@@ -83,6 +106,21 @@ export default function RecipeDetailPage() {
           </div>
         </div>
       </div>
+
+      {showShare && (
+        <div className="mb-8 flex justify-center">
+          <RecipeShareCard
+            name={data.name}
+            description={data.description}
+            photoUrl={data.photoUrl}
+            ingredients={ingredients}
+            steps={steps}
+            cookingTime={data.cookingTime}
+            difficulty={data.difficulty}
+            seasoningNames={data.seasoningPowders.map((sp) => sp.seasoningPowder.name)}
+          />
+        </div>
+      )}
 
       <div className="grid md:grid-cols-2 gap-8">
         <div className="cute-card p-6">

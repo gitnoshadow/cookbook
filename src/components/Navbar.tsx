@@ -17,6 +17,9 @@ export default function Navbar() {
           <Link href="/recipes" className="hover:opacity-70 transition-opacity" style={{ color: "#5d4037" }}>
             所有食譜
           </Link>
+          <Link href="/favorites" className="hover:opacity-70 transition-opacity" style={{ color: "#5d4037" }}>
+            ⭐ 我的最愛
+          </Link>
           <Link
             href="/seasonings/new"
             className="cute-btn text-white"
