@@ -20,6 +20,18 @@ export default function Navbar() {
           <Link href="/favorites" className="hover:opacity-70 transition-opacity" style={{ color: "#5d4037" }}>
             ⭐ 我的最愛
           </Link>
+          <button onClick={async () => {
+            const res = await fetch("/api/export");
+            const blob = await res.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "cookbook-backup.json";
+            a.click();
+            URL.revokeObjectURL(url);
+          }} className="hover:opacity-70 transition-opacity text-sm cursor-pointer" style={{ color: "#5d4037" }}>
+            📥 匯出
+          </button>
           <Link
             href="/seasonings/new"
             className="cute-btn text-white"
