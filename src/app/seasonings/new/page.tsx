@@ -10,7 +10,7 @@ type SearchResult = { id: number; name: string; description: string | null };
 export default function NewSeasoningPage() {
   const router = useRouter();
   const [form, setForm] = useState({
-    name: "", description: "", imageUrl: "",
+    name: "", imageUrl: "",
     brand: "", ingredients: "", flavorProfile: "", mainUse: "", pairingSuggestions: "",
   });
   const [saving, setSaving] = useState(false);
@@ -102,11 +102,6 @@ export default function NewSeasoningPage() {
         <div>
           <label className="font-semibold block mb-2" style={{ color: "#5d4037" }}>🤝 搭配建議</label>
           <textarea value={form.pairingSuggestions} onChange={set("pairingSuggestions")} placeholder="例如：搭配大蒜、洋蔥更香..." rows={2} className="cute-input w-full resize-none" />
-        </div>
-
-        <div>
-          <label className="font-semibold block mb-2" style={{ color: "#5d4037" }}>📝 描述（選填）</label>
-          <textarea value={form.description} onChange={set("description")} placeholder="簡單介紹這個調味粉..." rows={3} className="cute-input w-full resize-none" />
         </div>
 
         <div>

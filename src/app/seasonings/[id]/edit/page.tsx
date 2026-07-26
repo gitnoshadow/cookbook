@@ -8,7 +8,7 @@ export default function EditSeasoningPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const [form, setForm] = useState({
-    name: "", description: "", imageUrl: "",
+    name: "", imageUrl: "",
     brand: "", ingredients: "", flavorProfile: "", mainUse: "", pairingSuggestions: "",
   });
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function EditSeasoningPage() {
       .then((r) => r.json())
       .then((d) => {
         setForm({
-          name: d.name, description: d.description || "", imageUrl: d.imageUrl || "",
+          name: d.name, imageUrl: d.imageUrl || "",
           brand: d.brand || "", ingredients: d.ingredients || "",
           flavorProfile: d.flavorProfile || "", mainUse: d.mainUse || "",
           pairingSuggestions: d.pairingSuggestions || "",
@@ -83,11 +83,6 @@ export default function EditSeasoningPage() {
         <div>
           <label className="font-semibold block mb-2" style={{ color: "#5d4037" }}>🤝 搭配建議</label>
           <textarea value={form.pairingSuggestions} onChange={set("pairingSuggestions")} rows={2} className="cute-input w-full resize-none" />
-        </div>
-
-        <div>
-          <label className="font-semibold block mb-2" style={{ color: "#5d4037" }}>📝 描述</label>
-          <textarea value={form.description} onChange={set("description")} rows={3} className="cute-input w-full resize-none" />
         </div>
 
         <div>
