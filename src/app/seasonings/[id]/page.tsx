@@ -10,6 +10,11 @@ type SeasoningDetail = {
   name: string;
   description: string | null;
   imageUrl: string | null;
+  brand: string | null;
+  ingredients: string | null;
+  flavorProfile: string | null;
+  mainUse: string | null;
+  pairingSuggestions: string | null;
   recipes: { recipe: {
     id: number;
     name: string;
@@ -55,6 +60,19 @@ export default function SeasoningDetailPage() {
           <div className="flex-1">
             <h1 className="text-3xl font-bold mb-2" style={{ color: "#5d4037" }}>{data.name}</h1>
             {data.description && <p style={{ color: "#8d6e63" }}>{data.description}</p>}
+            {(data.brand || data.ingredients) && (
+              <div className="flex gap-4 mt-2 text-sm">
+                {data.brand && <span style={{ color: "#8d6e63" }}>🏷️ {data.brand}</span>}
+                {data.ingredients && <span style={{ color: "#8d6e63" }}>📋 {data.ingredients}</span>}
+              </div>
+            )}
+            {(data.flavorProfile || data.mainUse || data.pairingSuggestions) && (
+              <div className="flex flex-col gap-1 mt-3 text-sm">
+                {data.flavorProfile && <span style={{ color: "#6d4c41" }}>🌿 風味：{data.flavorProfile}</span>}
+                {data.mainUse && <span style={{ color: "#6d4c41" }}>🍳 用途：{data.mainUse}</span>}
+                {data.pairingSuggestions && <span style={{ color: "#6d4c41" }}>🤝 搭配：{data.pairingSuggestions}</span>}
+              </div>
+            )}
             <p className="text-sm mt-2" style={{ color: "#e85d7d" }}>📖 共 {data.recipes.length} 道食譜</p>
           </div>
           <div className="flex gap-3">

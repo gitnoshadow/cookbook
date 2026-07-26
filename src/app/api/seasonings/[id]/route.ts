@@ -33,6 +33,11 @@ export async function PUT(
         name: body.name,
         description: body.description ?? null,
         imageUrl: body.imageUrl ?? null,
+        brand: body.brand ?? null,
+        ingredients: body.ingredients ?? null,
+        flavorProfile: body.flavorProfile ?? null,
+        mainUse: body.mainUse ?? null,
+        pairingSuggestions: body.pairingSuggestions ?? null,
       },
     });
     return NextResponse.json(seasoning);

@@ -8,13 +8,18 @@ datasource db {
 }
 
 model SeasoningPowder {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
-  description String?
-  imageUrl    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  recipes     RecipeSeasoningPowder[]
+  id                 Int      @id @default(autoincrement())
+  name               String   @unique
+  description        String?
+  imageUrl           String?
+  brand              String?
+  ingredients        String?
+  flavorProfile      String?
+  mainUse            String?
+  pairingSuggestions String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  recipes            RecipeSeasoningPowder[]
 }
 
 model Recipe {
