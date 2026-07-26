@@ -11,6 +11,7 @@ type Recipe = {
   photoUrl: string | null;
   cookingTime: number | null;
   difficulty: string | null;
+  isFavorited: boolean;
   seasoningPowders: { seasoningPowder: { id: number; name: string } }[];
 };
 
@@ -50,6 +51,8 @@ export default function RecipesPage() {
                 photoUrl={r.photoUrl}
                 cookingTime={r.cookingTime}
                 difficulty={r.difficulty}
+                isFavorited={r.isFavorited}
+                onFavoriteToggle={(id, newState) => setRecipes(prev => prev.map(r => r.id === id ? { ...r, isFavorited: newState } : r))}
               />
               <div className="flex flex-wrap gap-1 mt-2 px-1">
                 {r.seasoningPowders.map((sp) => (

@@ -21,6 +21,7 @@ type Recipe = {
   photoUrl: string | null;
   cookingTime: number | null;
   difficulty: string | null;
+  isFavorited: boolean;
 };
 
 export default function HomePage() {
@@ -112,6 +113,8 @@ export default function HomePage() {
                 photoUrl={r.photoUrl}
                 cookingTime={r.cookingTime}
                 difficulty={r.difficulty}
+                isFavorited={r.isFavorited}
+                onFavoriteToggle={(id, newState) => setRecipes(prev => prev.map(r => r.id === id ? { ...r, isFavorited: newState } : r))}
               />
             ))}
           </div>

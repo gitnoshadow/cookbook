@@ -17,6 +17,7 @@ type SeasoningDetail = {
     photoUrl: string | null;
     cookingTime: number | null;
     difficulty: string | null;
+    isFavorited: boolean;
   } }[];
 };
 
@@ -90,7 +91,7 @@ export default function SeasoningDetailPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.recipes.map((r) => (
-            <RecipeCard
+              <RecipeCard
               key={r.recipe.id}
               id={r.recipe.id}
               name={r.recipe.name}
@@ -98,6 +99,8 @@ export default function SeasoningDetailPage() {
               photoUrl={r.recipe.photoUrl}
               cookingTime={r.recipe.cookingTime}
               difficulty={r.recipe.difficulty}
+              isFavorited={r.recipe.isFavorited}
+              onFavoriteToggle={(id, newState) => setData(prev => prev ? { ...prev, recipes: prev.recipes.map(r => r.recipe.id === id ? { ...r, recipe: { ...r.recipe, isFavorited: newState } } : r) } : prev)}
             />
           ))}
         </div>
