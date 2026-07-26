@@ -50,7 +50,7 @@ export default function HomePage() {
       {/* Seasonings */}
       <section className="mb-12">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold" style={{ color: "#5d4037" }}>🧂 調味粉一覽</h2>
+          <h2 className="text-xl font-bold" style={{ color: "#5d4037" }}>🧂 調味粉一覽 ({seasonings.length})</h2>
           <Link href="/seasonings" className="text-sm font-medium hover:opacity-70" style={{ color: "#e85d7d" }}>
             查看全部 →
           </Link>
@@ -85,7 +85,7 @@ export default function HomePage() {
       {/* Recent Recipes */}
       <section>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold" style={{ color: "#5d4037" }}>🍽️ 最新食譜</h2>
+          <h2 className="text-xl font-bold" style={{ color: "#5d4037" }}>🍽️ 最新食譜 ({recipes.length})</h2>
           <Link href="/recipes" className="text-sm font-medium hover:opacity-70" style={{ color: "#e85d7d" }}>
             查看全部 →
           </Link>
