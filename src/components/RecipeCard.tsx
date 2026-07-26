@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import HeartIcon from "./HeartIcon";
 
 type RecipeCardProps = {
   id: number;
@@ -59,7 +60,7 @@ export default function RecipeCard({ id, name, description, photoUrl, cookingTim
         className="absolute top-3 right-3 text-xl transition-transform hover:scale-110 active:scale-90"
         style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))" }}
       >
-        {fav ? "❤️" : "🤍"}
+        <HeartIcon filled={fav} size={22} />
       </button>
     </div>
   );

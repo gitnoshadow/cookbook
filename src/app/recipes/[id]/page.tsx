@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import RecipeShareCard from "@/components/RecipeShareCard";
+import HeartIcon from "@/components/HeartIcon";
 
 type RecipeDetail = {
   id: number;
@@ -69,8 +70,8 @@ export default function RecipeDetailPage() {
             <div className="flex-1">
               <div className="flex items-center gap-3">
                 <h1 className="text-3xl font-bold" style={{ color: "#5d4037" }}>{data.name}</h1>
-                <button onClick={toggleFav} className="text-2xl transition-transform hover:scale-110">
-                  {fav ? "❤️" : "🤍"}
+                <button onClick={toggleFav} className="transition-transform hover:scale-110">
+                  <HeartIcon filled={fav} size={28} />
                 </button>
               </div>
               {data.description && <p className="mt-1" style={{ color: "#8d6e63" }}>{data.description}</p>}
