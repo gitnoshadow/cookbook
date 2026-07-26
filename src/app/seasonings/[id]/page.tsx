@@ -69,8 +69,8 @@ export default function SeasoningDetailPage() {
             {(data.flavorProfile || data.mainUse || data.pairingSuggestions) && (
               <div className="flex flex-col gap-1 mt-3 text-sm">
                 {data.flavorProfile && <span style={{ color: "#6d4c41" }}>🌿 風味：{data.flavorProfile}</span>}
-                {data.mainUse && <span style={{ color: "#6d4c41" }}>🍳 用途：{data.mainUse}</span>}
-                {data.pairingSuggestions && <span style={{ color: "#6d4c41" }}>🤝 搭配：{data.pairingSuggestions}</span>}
+                {data.mainUse && <div style={{ color: "#6d4c41", whiteSpace: "pre-wrap" }}>🍳 用途：{data.mainUse}</div>}
+                {data.pairingSuggestions && <div style={{ color: "#6d4c41", whiteSpace: "pre-wrap" }}>🤝 搭配：{data.pairingSuggestions}</div>}
               </div>
             )}
             <p className="text-sm mt-2" style={{ color: "#e85d7d" }}>📖 共 {data.recipes.length} 道食譜</p>

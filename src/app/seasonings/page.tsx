@@ -10,6 +10,7 @@ type Seasoning = {
   name: string;
   description: string | null;
   imageUrl: string | null;
+  flavorProfile: string | null;
   _count: { recipes: number };
 };
 
@@ -55,6 +56,7 @@ function SeasoningsContent() {
               description={s.description}
               imageUrl={s.imageUrl}
               recipeCount={s._count.recipes}
+              flavorProfile={s.flavorProfile}
             />
           ))}
         </div>
