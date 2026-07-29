@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 type SeasoningCardProps = {
   id: number;
@@ -13,9 +14,9 @@ export default function SeasoningCard({ id, name, description, imageUrl, recipeC
   return (
     <Link href={`/seasonings/${id}`}>
       <div className="cute-card p-5 h-full flex flex-col items-center text-center gap-3">
-        <div className="w-20 h-20 rounded-full flex items-center justify-center text-3xl" style={{ background: "linear-gradient(135deg, #ffd6e0, #fff5f7)" }}>
+        <div className="relative w-20 h-20 rounded-full flex items-center justify-center text-3xl overflow-hidden" style={{ background: "linear-gradient(135deg, #ffd6e0, #fff5f7)" }}>
           {imageUrl ? (
-            <img src={imageUrl} alt={name} className="w-full h-full rounded-full object-cover" />
+            <Image src={imageUrl} alt={name} fill sizes="80px" className="object-cover" />
           ) : (
             "🧂"
           )}

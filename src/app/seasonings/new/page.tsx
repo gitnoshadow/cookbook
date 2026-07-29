@@ -18,7 +18,7 @@ export default function NewSeasoningPage() {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
   useEffect(() => {
-    if (!searchQuery.trim()) { setSearchResults([]); return; }
+    if (!searchQuery.trim()) { return; }
     const timer = setTimeout(() => {
       fetch(`/api/seasonings?q=${encodeURIComponent(searchQuery)}`).then((r) => r.json()).then(setSearchResults);
     }, 300);
@@ -57,7 +57,7 @@ export default function NewSeasoningPage() {
           placeholder="🔍 搜尋現有的調味粉..."
           className="cute-input w-full"
         />
-        {searchResults.length > 0 && (
+        {searchQuery.trim() && searchResults.length > 0 && (
           <div className="mt-3 flex flex-col gap-2 max-h-48 overflow-y-auto">
             {searchResults.map((s) => (
               <Link key={s.id} href={`/seasonings/${s.id}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-pink-50 transition-colors">

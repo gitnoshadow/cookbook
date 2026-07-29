@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import HeartIcon from "./HeartIcon";
 
 type RecipeCardProps = {
@@ -36,9 +37,9 @@ export default function RecipeCard({ id, name, description, photoUrl, cookingTim
     <div className="relative">
       <Link href={`/recipes/${id}`}>
         <div className="cute-card overflow-hidden h-full flex flex-col">
-          <div className="h-40 bg-gradient-to-br from-pink-100 to-orange-100 flex items-center justify-center text-5xl overflow-hidden">
+          <div className="relative h-40 bg-gradient-to-br from-pink-100 to-orange-100 flex items-center justify-center text-5xl overflow-hidden">
             {photoUrl ? (
-              <img src={photoUrl} alt={name} className="w-full h-full object-cover" />
+              <Image src={photoUrl} alt={name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
             ) : (
               "🍳"
             )}
@@ -57,7 +58,7 @@ export default function RecipeCard({ id, name, description, photoUrl, cookingTim
       </Link>
       <button
         onClick={handleFav}
-        className="absolute top-3 right-3 text-xl transition-transform hover:scale-110 active:scale-90"
+        className="absolute top-3 right-3 text-xl transition-transform hover:scale-110 active:scale-90 z-10"
         style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))" }}
       >
         <HeartIcon filled={fav} size={22} />

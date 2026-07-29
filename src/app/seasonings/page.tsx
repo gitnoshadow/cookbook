@@ -1,28 +1,20 @@
-"use client";
-
-import { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import SeasoningCard from "@/components/SeasoningCard";
+import { prisma } from "@/lib/prisma";
 
-type Seasoning = {
-  id: number;
-  name: string;
-  description: string | null;
-  imageUrl: string | null;
-  flavorProfile: string | null;
-  _count: { recipes: number };
+type PageProps = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-function SeasoningsContent() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("q") || "";
-  const [seasonings, setSeasonings] = useState<Seasoning[]>([]);
+export default async function SeasoningsPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const query = typeof params.q === "string" ? params.q : "";
 
-  useEffect(() => {
-    const url = query ? `/api/seasonings?q=${encodeURIComponent(query)}` : "/api/seasonings";
-    fetch(url).then((r) => r.json()).then(setSeasonings);
-  }, [query]);
+  const seasonings = await prisma.seasoningPowder.findMany({
+    where: query ? { name: { contains: query } } : undefined,
+    include: { _count: { select: { recipes: true } } },
+    orderBy: { name: "asc" },
+  });
 
   return (
     <div>
@@ -62,13 +54,5 @@ function SeasoningsContent() {
         </div>
       )}
     </div>
-  );
-}
-
-export default function SeasoningsPage() {
-  return (
-    <Suspense fallback={<div className="text-center py-20 text-4xl">⏳</div>}>
-      <SeasoningsContent />
-    </Suspense>
   );
 }
