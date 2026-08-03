@@ -60,19 +60,6 @@ export default function SeasoningDetailPage() {
           <div className="flex-1">
             <h1 className="text-3xl font-bold mb-2" style={{ color: "#5d4037" }}>{data.name}</h1>
             {data.description && <p style={{ color: "#8d6e63" }}>{data.description}</p>}
-            {(data.brand || data.ingredients) && (
-              <div className="flex gap-4 mt-2 text-sm">
-                {data.brand && <span style={{ color: "#8d6e63" }}>🏷️ {data.brand}</span>}
-                {data.ingredients && <span style={{ color: "#8d6e63" }}>📋 {data.ingredients}</span>}
-              </div>
-            )}
-            {(data.flavorProfile || data.mainUse || data.pairingSuggestions) && (
-              <div className="flex flex-col gap-1 mt-3 text-sm">
-                {data.flavorProfile && <span style={{ color: "#6d4c41" }}>🌿 風味：{data.flavorProfile}</span>}
-                {data.mainUse && <div style={{ color: "#6d4c41", whiteSpace: "pre-wrap" }}>🍳 用途：{data.mainUse}</div>}
-                {data.pairingSuggestions && <div style={{ color: "#6d4c41", whiteSpace: "pre-wrap" }}>🤝 搭配：{data.pairingSuggestions}</div>}
-              </div>
-            )}
             <p className="text-sm mt-2" style={{ color: "#e85d7d" }}>📖 共 {data.recipes.length} 道食譜</p>
           </div>
           <div className="flex gap-3">
@@ -89,6 +76,45 @@ export default function SeasoningDetailPage() {
           </div>
         </div>
       </div>
+
+      {(data.brand || data.ingredients || data.flavorProfile || data.mainUse || data.pairingSuggestions) && (
+        <div className="cute-card p-8 mb-8 overflow-hidden">
+          <table className="w-full text-sm [&>tbody>tr+tr>td]:border-t [&>tbody>tr+tr>td]:border-dashed [&>tbody>tr+tr>td]:border-[#ffd6e0]">
+            <tbody>
+              {data.brand && (
+                <tr>
+                  <td className="align-top py-3 pr-4 whitespace-nowrap rounded-lg font-medium w-28" style={{ color: "#8d6e63" }}>🏷️ 品牌</td>
+                  <td className="align-top py-3" style={{ color: "#6d4c41" }}>{data.brand}</td>
+                </tr>
+              )}
+              {data.ingredients && (
+                <tr>
+                  <td className="align-top py-3 pr-4 whitespace-nowrap rounded-lg font-medium w-28" style={{ color: "#8d6e63" }}>📋 成分</td>
+                  <td className="align-top py-3" style={{ color: "#6d4c41" }}>{data.ingredients}</td>
+                </tr>
+              )}
+              {data.flavorProfile && (
+                <tr>
+                  <td className="align-top py-3 pr-4 whitespace-nowrap rounded-lg font-medium w-28" style={{ color: "#8d6e63" }}>🌿 風味</td>
+                  <td className="align-top py-3" style={{ color: "#6d4c41" }}>{data.flavorProfile}</td>
+                </tr>
+              )}
+              {data.mainUse && (
+                <tr>
+                  <td className="align-top py-3 pr-4 whitespace-nowrap rounded-lg font-medium w-28" style={{ color: "#8d6e63" }}>🍳 主要用途</td>
+                  <td className="align-top py-3" style={{ color: "#6d4c41", whiteSpace: "pre-wrap" }}>{data.mainUse}</td>
+                </tr>
+              )}
+              {data.pairingSuggestions && (
+                <tr>
+                  <td className="align-top py-3 pr-4 whitespace-nowrap rounded-lg font-medium w-28" style={{ color: "#8d6e63" }}>🤝 搭配建議</td>
+                  <td className="align-top py-3" style={{ color: "#6d4c41", whiteSpace: "pre-wrap" }}>{data.pairingSuggestions}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold" style={{ color: "#5d4037" }}>🍽️ 相關食譜</h2>
